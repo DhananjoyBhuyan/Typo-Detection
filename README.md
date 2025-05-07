@@ -1,3 +1,4 @@
+# Python project, runs in python only.
 # Detect typos with ease!!!
 Just download the typo_detection.py file from this repo.
 It is way better than normal typo detectors, it has a solid logic and a lot of functions.

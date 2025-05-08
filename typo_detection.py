@@ -4,51 +4,6 @@
 Created on Wed Apr 16 22:04:55 2025
 
 Created by: Dhananjoy Bhuyan
-
-This typo detection module can help with typos, if you often do typing mistake or you type in a hurry where you can make typos, then use this module, for example if you are taking user input, and user needs to enter some keywords for certain things, then you can use this module, so if the user makes a typo then this module can help to detect and help with that.
-
-Functions of this module:
-1. is_typo(word, typo): Checks if typo is a typo of a word. Then returns two things, True and the corrected word if typo is really a typo. If it's not a typo then it just returns false and nothing else.
-
-2. string_difference(str1, str2): returns two things, the differences between the strings and the NUMBER of differences.
-
-3. check_typos(pairs): Check multiple pairs of (string, typo) and return 2 lists, one list of boolean values and one of corrected words, if corrected words[element] is None, that means that was not a typo.
-
-4. check_from_dictionary(word, dictionary, return_closest): Checks if the word is a typo of any of the words in the dictionary, it returns a list of tuples where each tuple has 2 elements: the suggested correction, the number of differences between the suggested word and the provided typo. IF return_closest is set to True, this function will only return the closest word.
-
-5. check_from_file(word, file_path): Same as check_from_dictionary, just loads the dictionary from a given text file, so the second argument needs to be the file path to the text file.
-
-For detailed information on each function, please call "help(<function name>)".
-
-Usage:
-
->>> is_typo("hello", "hlelo")
-True
->>> is_typo("the", "teh")
-True
->>> is_typo("haha", "hah")
-True
->>> is_typo("world", "hahaha")
-False
->>> string_difference("hello", "hlelo")
-(2, [('e', 'l'), ('l', 'e')])
->>> check_typos([("hello", "hlelo"), ("hello", "world"), ("hello", "hallo")])
-([True, False, True], ["hello", None, "hello"])
->>> dictionary = ["hello", "world", "the"]
->>> check_from_dictionary("teh", dictionary)
-[("the", 2)]
->>> dictionary.append("eth")
->>> check_from_dictionary("teh", dictionary)
-[("the", 2), ("eth", 2)]
->>> check_from_dictionary("teh", dictionary, return_closest=True)
-"the"
->>> check_from_file("teh", "/home/username/AllFiles/dictionary.txt")
-[("the", 2), ("tehe", 1), ("eth", 2)]
->>>
->>>
-
-Yaaaay!!
-
 """
 
 __version__ = "1.0.0"

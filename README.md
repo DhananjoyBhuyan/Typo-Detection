@@ -9,7 +9,7 @@ This module helps detect typos in user input using clever logic instead of machi
 ## 🚀 Features
 
 - ✅ No AI, no bloat – pure logic-based detection
-- 🧠 Detects swaps, missing letters, extra letters, etc.
+- 🧠 Detects typos accurately with lightweight processing, very efficient.
 - 📚 Compare against dictionaries or files
 - 🔁 Batch typo checking
 - ⚡ Super lightweight — no dependencies!

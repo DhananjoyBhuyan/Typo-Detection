@@ -1,6 +1,6 @@
 # Python project, runs in python only.
 # Detect typos with ease!!!
-Just download the typo_detection.py file from this repo.
+Just download the [typo_detection.py](typo_detection.py) file from this repo.
 It is way better than normal typo detectors, it has a solid logic and a lot of functions.
 ## Functions in it:
 1. is_typo(correct_word, typo) Detects and tells if it's a typo.

@@ -65,7 +65,7 @@ from typing import List, Optional
 
 
 def is_typo(string1: str, string2: str) -> (bool, Optional[str]):
-    def typo_detect(string: str, typo: str) -> (bool, Optional[str]):
+    def typo_detect(string: str, typo: str) -> bool:
         string = string.lower()
         typo = typo.lower()
         """
@@ -80,12 +80,12 @@ def is_typo(string1: str, string2: str) -> (bool, Optional[str]):
     
         Returns
         -------
-        bool, Optional[str]
-            True, corrected word if it's a typo of a string else False.
+        bool
+            True if it's a typo of a string else False.
     
         """
         if string == typo:
-            return True, string
+            return True
 
         l1, l2 = len(string), len(typo)
 
@@ -99,7 +99,7 @@ def is_typo(string1: str, string2: str) -> (bool, Optional[str]):
                     o = typo[i]
                     typo[i] = string[i]
                     if ''.join(typo) == string:
-                        return True, string
+                        return True
                     typo[i] = o
 
             # Case 2: Two adjacent characters flipped
@@ -107,19 +107,19 @@ def is_typo(string1: str, string2: str) -> (bool, Optional[str]):
                 for i in range(len(typo) - 1):
                     flipped = typo[i:i + 2][::-1]
                     if ''.join(flipped) == string[i:i + 2]:
-                        return True, string
+                        return True
 
         elif l1 == l2 + 1:
             # Case 3: One extra character in 'string'
             for i in range(len(typo) + 1):
                 if string[:i] + string[i+1:] == typo:
-                    return True, string
+                    return True
 
         elif l1 == l2 + 2:
             # Case 4: Two extra characters in 'string'
             for i in range(len(typo) + 1):
                 if string[:i] + string[i+2:] == typo:
-                    return True, string
+                    return True
 
         return False
     return typo_detect(string1, string2) or typo_detect(string2, string1)
@@ -270,4 +270,4 @@ def check_from_file(word: str, path: str, return_closest: bool = False) -> List[
     with open(path) as f:
         words = f.read().split()
 
-    return check_from_dictionary(word, words, True) if return_closest else check_from_dictionary(word, words)
+    return check_from_dictionary(word, words, return_closest)

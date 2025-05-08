@@ -64,63 +64,65 @@ __all__ = [
 from typing import List, Optional
 
 
-def is_typo(string: str, typo: str) -> (bool, Optional[str]):
-    string = string.lower()
-    typo = typo.lower()
-    """
-    Checks if the second string argument is a typo of the first.
+def is_typo(string1: str, string2: str) -> (bool, Optional[str]):
+    def typo_detect(string: str, typo: str) -> (bool, Optional[str]):
+        string = string.lower()
+        typo = typo.lower()
+        """
+        Checks if the second string argument is a typo of the first.
+    
+        Parameters
+        ----------
+        string : str
+            The main correct string
+        typo : str
+            The typo
+    
+        Returns
+        -------
+        bool, Optional[str]
+            True, corrected word if it's a typo of a string else False.
+    
+        """
+        if string == typo:
+            return True, string
 
-    Parameters
-    ----------
-    string : str
-        The main correct string
-    typo : str
-        The typo
+        l1, l2 = len(string), len(typo)
 
-    Returns
-    -------
-    bool, Optional[str]
-        True, corrected word if it's a typo of a string else False.
+        if l1 == l2:
+            # Case 1: One character is swapped (i.e., only one mismatch)
+            diff = [c for c, c2 in zip(typo, string) if c != c2]
+            if len(diff) == 1:
 
-    """
-    if string == typo:
-        return True, string
+                typo = list(typo)
+                for i in range(len(typo)):
+                    o = typo[i]
+                    typo[i] = string[i]
+                    if ''.join(typo) == string:
+                        return True, string
+                    typo[i] = o
 
-    l1, l2 = len(string), len(typo)
+            # Case 2: Two adjacent characters flipped
+            elif len(diff) == 2:
+                for i in range(len(typo) - 1):
+                    flipped = typo[i:i + 2][::-1]
+                    if ''.join(flipped) == string[i:i + 2]:
+                        return True, string
 
-    if l1 == l2:
-        # Case 1: One character is swapped (i.e., only one mismatch)
-        diff = [c for c, c2 in zip(typo, string) if c != c2]
-        if len(diff) == 1:
-
-            typo = list(typo)
-            for i in range(len(typo)):
-                o = typo[i]
-                typo[i] = string[i]
-                if ''.join(typo) == string:
+        elif l1 == l2 + 1:
+            # Case 3: One extra character in 'string'
+            for i in range(len(typo) + 1):
+                if string[:i] + string[i+1:] == typo:
                     return True, string
-                typo[i] = o
 
-        # Case 2: Two adjacent characters flipped
-        elif len(diff) == 2:
-            for i in range(len(typo) - 1):
-                flipped = typo[i:i + 2][::-1]
-                if ''.join(flipped) == string[i:i + 2]:
+        elif l1 == l2 + 2:
+            # Case 4: Two extra characters in 'string'
+            for i in range(len(typo) + 1):
+                if string[:i] + string[i+2:] == typo:
                     return True, string
 
-    elif l1 == l2 + 1:
-        # Case 3: One extra character in 'string'
-        for i in range(len(typo) + 1):
-            if string[:i] + string[i+1:] == typo:
-                return True, string
-
-    elif l1 == l2 + 2:
-        # Case 4: Two extra characters in 'string'
-        for i in range(len(typo) + 1):
-            if string[:i] + string[i+2:] == typo:
-                return True, string
-
-    return False
+        return False
+    return typo_detect(string1, string2) or typo_detect(string2, string1)
 
 
 def string_difference(str1: str, str2: str) -> tuple:

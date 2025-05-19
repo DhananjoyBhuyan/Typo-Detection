@@ -1,7 +1,7 @@
 # 🔍 Typo Detection Module for Python
 
 **Lightweight, fast, and smart typo detection without any AI or heavy libraries.**
-#### Note: A dictionary of english words is added in this repository, you can download that and use for autocorrect projects which need a huge dictionary of words.
+#### Note: A dictionary of english words is added in this repository, you can download that and use for autocorrect projects which need a huge dictionary of words. Download from here: [words.txt](words.txt)
 This module helps detect typos in user input using clever logic instead of machine learning. Perfect for CLI tools, forms, or text processing apps where accuracy and speed matter.
 
 ---
